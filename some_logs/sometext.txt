@@ -1,0 +1,88 @@
+Использование kinect на роботе:
+
+1. Была установлена ROS на Raspberry Pi B+
+2. Установлены модули на ROS для работы с Kinect
+3. Отдельно установлена библиотека libfreenect
+4. Пробовал запускать rviz по сети - не находятся ip адреса, ошибка
+5. Библиотеки для работы с libfreenect из python не работают
+6. gl-view из примеров libfreenect не работает
+7. чтобы заработал freenect-tiltdemo надо сначало запустить файл freenect-micview
+8. большинство примеров из libfreenect работает само по себе - не выкидывают ошибки т.е.
+9. Примеры, которые окна создают - не хватает мощности RPI, чтобы их отобразить
+10. Если запускать команду rostopic echo /camera/rgb/image_raw после запуска freenect, тогда данные отображаются с кинекта
+11. https://github.com/OpenKinect/libfreenect/blob/master/examples/regtest.c - этот исходник получает нужные данные и делает из них файлики
+12. Запуск команды:
+rosrun image_view image_view image:=/camera/rgb/image_color
+приводит к ошибке. Описание ошибки здесь: 
+https://github.com/ros-perception/image_pipeline/issues/201
+13. regtest начинает работать только после wavrecord.  - насколько я понимаю
+это загружает какую-то прошивку в кинект и делает его рабочим. Прошивка находится
+в audio.bins. audio.bins скачивается из интернета скриптом fwfetcher.py.
+14. Модуль kinect_aux просто не работает
+15. почти все команды из кинекта не работают, пока не загрзушь прошивку, см здесь:
+https://github.com/OpenKinect/libfreenect/issues/376
+16. из питона так и не заработало управление мотором, даже после загрузки прошивки
+
+
+
+-------------------------------------------------------
+
+Что нужно сделать
+1. заставить rviz работать по сети
+2. попробовать поставить ros из исходников на ноутбук. и opencv туда тоже из исходников,
+думаю, у ноутбука хватит мощности. где взять ноутбук? потестить кинект
+3. Понять какие пакеты нужны для SLAM в ROS и установить их
+4. ---- изучить библиотеки для кинект: http://wiki.ros.org/kinect
+5. попробовать на ноут ros поставить не из исходников, а из пакетов, потестить кинект
+6. изучить https://habrahabr.ru/search/?q=kinect&target_type=posts&flow=&order_by=relevance
+7. изучить https://habrahabr.ru/search/?target_type=posts&order_by=relevance&q=ROS&flow=
+8. Сохранить публикации нужные в pdf
+9. https://geektimes.ru/search/?q=kinect#h
+10. https://geektimes.ru/search/?target_type=posts&order_by=relevance&q=ros
+
+--------------------------------------------------------
+
+Ссылки на ROS на хабре и гиктаймс:
+
+Построение карты и локализация мобильного робота в ROS без одометрии с использованием laser_scan_matcher
+Добрый день читатели! Мы уже однажды коснулись темы локализации и SLAM в статье о 
+https://geektimes.ru/post/283556/
+
+Vision-based SLAM: tutorial
+После опубликования статьи об опыте использования монокулярного SLAM мы получили несколько комментариев с вопро 
+https://habrahabr.ru/company/singularis/blog/277109/
+
+SLAM в ROS
+На данный момент существует большое количество различных алгоритмов SLAM , которые разрабатываются в лабораториях по
+http://robotics.osll.ru/2015/02/slam-ros.html
+
+Работа с Kinect под ROS / Робософт / RoboCraft. Роботы? Это просто!
+Для меня, Kinect — это, в первую очередь, интересный датчик для технического зрения роботов. И хотя, с ним можно
+http://robocraft.ru/blog/robosoft/757.html
+
+Kinect - начало работы - настройка OpenCV / Компьютерное зрение / RoboCraft. Роботы? Это просто!
+Перед самым Новым Годом , мне наконец-то доставили сенсор Kinect :)  Вот он, красавец:  вместе с сенсоро
+http://robocraft.ru/blog/computervision/718.html
+
+Использование камеры Microsoft Kinect 360 в ROS Indigo
+Добрый день, уважаемые хабрачитатели!  Последние наблюдения и собственный опыт по
+https://geektimes.ru/post/278864/
+
+Игровой контроллер Kinect – первое на рынке устройство для прямого трехмерного измерения
+https://geektimes.ru/post/109337/
+
+Практическое использование ROS на Raspberry Pi — часть 1-4
+https://geektimes.ru/post/268876/
+https://geektimes.ru/post/268928/
+https://geektimes.ru/post/271658/
+https://geektimes.ru/post/276820/
+
+ROS. Стек навигации - -rtabmap_ros
+https://habrahabr.ru/post/327888/
+
+Основы работы с Robotic Operating System
+https://geektimes.ru/post/128024/
+
+ROS, ELM и черепашка
+
+https://habrahabr.ru/post/340534/
